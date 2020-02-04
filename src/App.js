@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BookContextProvider from './contexts/BookContext';
+import Navbar from './components/navbar/Navbar.component';
+import BookList from './components/booklist/BookList.component';
+import BookForm from './components/bookform/BookForm.component';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BookContextProvider>
+        <Navbar />
+        <BookList />
+        <BookForm />
+      </BookContextProvider>
     </div>
   );
 }
