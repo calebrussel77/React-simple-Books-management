@@ -1,28 +1,16 @@
-import React, {useState, createContext} from 'react';
+import React, {useReducer, createContext} from 'react';
+import bookReducers from '../reducers/bookReducers';
 
-export const BookContext = createContext ();
+export const BookContext = createContext();
 
 const BookContextProvider = props => {
-  const [books, setBooks] = useState ([
-    {title: 'the name of kindle', author: 'patrick cluster', id: 1},
-    {title: 'the amazing stuff', author: 'sergine vane', id: 2},
-  ]);
+  //useReducer takes 02 values: the reducer function & the initial state
 
-  const generateId = () => {
-    return Math.random * 4;
-  };
-
-  const addBooks = (title, author) => {
-    setBooks ([...books, {title, author, id: generateId}]);
-  };
-  const removeBook = id => {
-    setBooks (books.filter (book => book.id !== id));
-  };
+  const [books, dispatch] = useReducer(bookReducers, []);
 
   return (
-    <BookContext.Provider
-      value={{books: books, removeBook: removeBook, addBooks: addBooks}}
-    >
+    //dispatch allows us to do multiple action set in the bookReducers functon
+    <BookContext.Provider value={{books: books, dispatch}}>
       {props.children}
     </BookContext.Provider>
   );
