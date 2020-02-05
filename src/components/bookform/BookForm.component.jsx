@@ -3,20 +3,18 @@ import {BookContext} from '../../contexts/BookContext';
 
 const BookForm = () => {
   const {dispatch} = useContext(BookContext);
-  const [author, setAuthor] = useState('');
-  const [title, setTitle] = useState('');
+  const [bookInfo, setBookInfo] = useState({author: '', title: ''});
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({
       type: 'ADD_BOOK',
       book: {
-        title: title,
-        author: author,
+        title: bookInfo.title,
+        author: bookInfo.author,
       },
     });
-    setAuthor('');
-    setTitle('');
+    setBookInfo({author: '', title: ''});
   };
 
   return (
@@ -24,15 +22,15 @@ const BookForm = () => {
       <input
         type="text"
         placeholder="book title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        value={bookInfo.title}
+        onChange={e => setBookInfo({...bookInfo, title: e.target.value})}
         required
       />
       <input
         type="text"
         placeholder="book author"
-        value={author}
-        onChange={e => setAuthor(e.target.value)}
+        value={bookInfo.author}
+        onChange={e => setBookInfo({...bookInfo, author: e.target.value})}
         required
       />
       <input type="submit" value="add book" />

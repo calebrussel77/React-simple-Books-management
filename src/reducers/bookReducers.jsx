@@ -1,5 +1,3 @@
-import React from 'react';
-
 const bookReducers = (state, action) => {
   const generatedId = () => {
     return Math.random * 4;
